@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join Telegram & Earn</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f4f4f4;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 400px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h1 { color: #007bff; }
+    .btn {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      background: #007bff;
+      color: #fff;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    .balance-box {
+      font-size: 20px;
+      margin: 15px 0;
+      font-weight: bold;
+    }
+    .hidden {
+      display: none;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Join & Earn ₹10</h1>
+    <p>दोनों Telegram चैनल जॉइन करें और ₹10 पाएं!</p>
+
+    <button class="btn" id="join1" onclick="joinChannel(1)">Join Channel 1</button>
+    <button class="btn" id="join2" onclick="joinChannel(2)">Join Channel 2</button>
+
+    <div class="balance-box">Current Balance: ₹<span id="balance">0</span></div>
+
+    <button class="btn" id="withdrawBtn" onclick="showWithdraw()" disabled>Withdraw Now</button>
+
+    <div id="withdrawSection" class="hidden">
+      <p>Enter your UPI ID:</p>
+      <input type="text" id="upi" placeholder="example@upi">
+      <button class="btn" onclick="submitWithdraw()">Submit</button>
+      <p id="status" style="margin-top:10px; color:green;"></p>
+    </div>
+  </div>
+
+  <script>
+    let balance = 0;
+
+    function joinChannel(num) {
+      if(num === 1 && !document.getElementById('join1').disabled){
+        window.open('https://t.me/jiomartlootsrs', '_blank');
+        balance += 5;
+        document.getElementById('join1').disabled = true;
+      }
+      if(num === 2 && !document.getElementById('join2').disabled){
+        window.open('https://t.me/Ysbhai99', '_blank');
+        balance += 5;
+        document.getElementById('join2').disabled = true;
+      }
+      document.getElementById('balance').innerText = balance;
+
+      if(balance >= 10){
+        document.getElementById('withdrawBtn').disabled = false;
+      }
+    }
+
+    function showWithdraw(){
+      document.getElementById('withdrawSection').classList.remove('hidden');
+    }
+
+    function submitWithdraw(){
+      let upi = document.getElementById('upi').value;
+      if(upi.trim() === ''){
+        alert('Please enter a valid UPI ID');
+        return;
+      }
+      document.getElementById('status').innerText = 'Payment Pending... Credit in 24 hours';
+    }
+  </script>
+</body>
+</html>
